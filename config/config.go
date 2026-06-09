@@ -44,6 +44,11 @@ func (c *OpenWrtConfig) GetBaseURL() string {
 	return c.Protocol + "://" + c.Host + ":" + c.Port
 }
 
+// GetServerPort 获取服务监听端口
+func GetServerPort() string {
+	return getEnv("SERVER_PORT", "8080")
+}
+
 func getEnv(key, defaultValue string) string {
 	value := os.Getenv(key)
 	if value == "" {

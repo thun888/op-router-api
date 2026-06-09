@@ -2,6 +2,7 @@ package main
 
 import (
 	"net/http"
+	"router-api/config"
 	"router-api/handler"
 	"router-api/middleware"
 
@@ -18,6 +19,9 @@ func main() {
 	e.Use(echomiddleware.Recover())
 	e.Use(echomiddleware.CORS())
 	e.Use(middleware.ErrorHandler)
+
+	// 前端页面
+	e.GET("/", handler.NetworkPage)
 
 	// 路由
 	api := e.Group("/api")
@@ -40,5 +44,5 @@ func main() {
 	}
 
 	// 启动服务器
-	e.Logger.Fatal(e.Start(":8080"))
+	e.Logger.Fatal(e.Start(":" + config.GetServerPort()))
 }
